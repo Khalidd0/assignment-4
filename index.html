@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Personal Portfolio - Assignment 4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">
+      <span class="logo">KP</span>
+      <span class="brand-text">Personal Portfolio</span>
+    </div>
+
+    <button id="theme-toggle" type="button" aria-label="Toggle theme">
+      moon
+    </button>
+  </header>
+
+  <main>
+    <!-- Hero / intro -->
+    <section id="hero" class="card hero">
+      <h1>Hello, <span id="hero-name">there</span></h1>
+      <p>
+        Welcome to my portfolio website for <strong>Assignment 4 - Personal Web Application</strong>.
+        This build pulls together API integration, complex state logic, performance considerations, and
+        AI-assisted development.
+      </p>
+
+      <form id="name-form" class="inline-form">
+        <label for="name-input">Tell me your name so I can greet you:</label>
+        <div class="inline-form-row">
+          <input id="name-input" name="name" type="text" placeholder="Your name" />
+          <button type="submit">Save</button>
+        </div>
+        <p id="name-feedback" class="muted" aria-live="polite"></p>
+      </form>
+
+      <p class="muted" id="session-timer">You have been here for 0s.</p>
+    </section>
+
+    <!-- Experience level logic -->
+    <section id="experience-section" class="card">
+      <h2>Choose Your Experience Level</h2>
+      <p class="muted">
+        I will highlight different project types based on your selection. This setting is remembered for your next visit.
+      </p>
+
+      <div class="experience-buttons">
+        <button type="button" data-level="beginner">Beginner</button>
+        <button type="button" data-level="intermediate">Intermediate</button>
+        <button type="button" data-level="advanced">Advanced</button>
+      </div>
+
+      <p id="experience-message" class="muted"></p>
+    </section>
+
+    <!-- Projects: filter/sort/search + show/hide -->
+    <section id="projects-section" class="card">
+      <header class="section-header">
+        <h2>My Projects</h2>
+        <button id="toggle-projects" type="button">Hide projects</button>
+      </header>
+
+      <div class="controls">
+        <label>
+          Filter:
+          <select id="filter">
+            <option value="all">All</option>
+            <option value="frontend">Frontend</option>
+            <option value="fullstack">Fullstack</option>
+            <option value="practice">Practice</option>
+          </select>
+        </label>
+
+        <label>
+          Sort:
+          <select id="sort">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+          </select>
+        </label>
+
+        <label class="search-label">
+          Search:
+          <input id="search" type="search" placeholder="Search by title or keywords" />
+        </label>
+      </div>
+
+      <div id="projects-list" class="project-grid" aria-live="polite"></div>
+
+      <p id="projects-empty" class="muted hidden">
+        No projects match your current filters. Try changing the filter, sort, or search term.
+      </p>
+    </section>
+
+    <!-- GitHub API integration -->
+    <section id="github-section" class="card">
+      <h2>Latest GitHub Repositories</h2>
+      <p class="muted">
+        This section uses the public <strong>GitHub REST API</strong> to fetch a list of my most
+        recently updated repositories.
+      </p>
+
+      <div class="github-controls">
+        <label>
+          GitHub username:
+          <input id="github-username" type="text" value="octocat" />
+        </label>
+        <button id="github-refresh" type="button">Refresh</button>
+      </div>
+
+      <p id="github-status" class="muted" aria-live="polite"></p>
+
+      <div id="github-repos" class="project-grid"></div>
+    </section>
+
+    <!-- Skills heatmap / unique feature -->
+    <section id="skills-section" class="card">
+      <header class="section-header">
+        <div>
+          <p class="eyebrow">New in Assignment 4</p>
+          <h2>Skills Heatmap and Focus</h2>
+        </div>
+        <div class="chip" id="skills-focus-chip" aria-live="polite"></div>
+      </header>
+
+      <p class="muted">
+        Explore my skill areas visually. Filter by focus, navigate with arrow keys, and hover or focus to see details. Your preferred focus is saved for next time.
+      </p>
+
+      <div class="controls">
+        <label>
+          Focus:
+          <select id="skills-focus">
+            <option value="all">All skills</option>
+            <option value="frontend">Frontend UI</option>
+            <option value="backend">Backend and APIs</option>
+            <option value="tooling">Tooling and DX</option>
+          </select>
+        </label>
+        <label>
+          Minimum strength:
+          <input id="skills-threshold" type="range" min="1" max="5" step="1" value="1" />
+        </label>
+        <span class="muted" id="skills-threshold-label" aria-live="polite"></span>
+      </div>
+
+      <div class="heatmap" role="grid" aria-label="Skill heatmap">
+        <div id="skills-grid" class="heatmap-grid"></div>
+      </div>
+      <p class="muted small">
+        Tip: Use arrow keys to move between skills. Press Enter to pin or unpin a focus area.
+      </p>
+    </section>
+
+    <!-- Contact form with validation -->
+    <section id="contact-section" class="card">
+      <h2>Contact Me</h2>
+      <p class="muted">
+        This form demonstrates multi-step validation: required fields, email format, and minimum
+        message length.
+      </p>
+
+      <form id="contact-form" novalidate>
+        <div class="field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" required />
+          <p class="error" data-error-for="contact-name"></p>
+        </div>
+
+        <div class="field">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" required />
+          <p class="error" data-error-for="contact-email"></p>
+        </div>
+
+        <div class="field">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" rows="4" required></textarea>
+          <p class="error" data-error-for="contact-message"></p>
+        </div>
+
+        <button type="submit">Send Message</button>
+        <p id="contact-feedback" class="muted" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Built for Assignment 4 - Personal Web Application.</p>
+    <p class="muted">
+      Dark/light mode, state persistence, API integration, and performance optimisations applied.
+    </p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
