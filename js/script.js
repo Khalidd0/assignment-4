@@ -524,9 +524,7 @@
     cells.forEach((cell, idx) => {
       const active = idx === STATE.skillsSelection;
       cell.classList.toggle("active", active);
-      if (active) {
-        cell.focus();
-      }
+      if (active) cell.focus();
     });
   };
 
@@ -563,6 +561,16 @@
       localStorage.setItem("skillsThreshold", String(STATE.skillsThreshold));
       STATE.skillsSelection = 0;
       renderSkills();
+    });
+
+    grid.addEventListener("click", (e) => {
+      const cell = e.target.closest(".heatmap-cell");
+      if (!cell) return;
+      const idx = $$(".heatmap-cell").indexOf(cell);
+      if (idx >= 0) {
+        STATE.skillsSelection = idx;
+        highlightSkill();
+      }
     });
 
     grid.addEventListener("keydown", (e) => {
