@@ -22,11 +22,7 @@ This repository is the final, polished version of my personal portfolio web appl
 
 ## Deployment
 - Live site (GitHub Pages): https://khalidd0.github.io/assignment-4/
-- Ready for static hosting (GitHub Pages/Netlify/Vercel). For GitHub Pages:
-  1) Push to `main` on a public repo named `assignment-4`.
-  2) Enable Pages for the `main` branch root.
-  3) Your site will be available at `https://<your-username>.github.io/assignment-4/`.
-
+  
 ## Project Structure
 - index.html
 - css/styles.css
